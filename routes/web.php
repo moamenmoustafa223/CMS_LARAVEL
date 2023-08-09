@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,23 +20,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/auth/login',[AuthController::class,'login'])->name('admin.login');
-    Route::post('/auth/login',[AuthController::class,'loginPost'])->name('admin.login');
+    Route::get('/auth/login', [AuthController::class, 'login'])->name('admin.login');
+    Route::post('/auth/login', [AuthController::class, 'loginPost'])->name('admin.login');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/admin',[adminController::class,'index'])->name('admin.index');
-    Route::get('/admin/postabout',[adminController::class,'getPostAbout'])->name('admin.getPostAbout');
-
-    Route::get('/admin/showabout',[adminController::class,'getShowAbout'])->name('admin.getShowAbout');
-    Route::post('/admin/postAbout',[AdminController::class,'postAbout'])->name('admin.postAbout');
-    Route::delete('/admin/deleteAbout/{id}',[AdminController::class,'deleteAbout'])->name('admin.deleteAbout');
-    Route::get('/admin/editAbout/{id}',[AdminController::class,'editAbout'])->name('admin.editAbout');
-    Route::put('/admin/updateAbout/{id}',[AdminController::class,'updateAbout'])->name('admin.updateAbout');
-
-    Route::delete('/logout',[AuthController::class,'logout'])->name('admin.logout');
+    Route::get('/admin', [adminController::class, 'index'])->name('admin.index');
+    Route::delete('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+    Route::resource('/carousel', CarouselController::class);
+    Route::resource('/logo', LogoController::class);
 });
 
-Route::get('/', function () {
-    return view('landingpage.index');
-})->name('index');
+Route::get('/',[HomeController::class, 'index'])->name('index');
