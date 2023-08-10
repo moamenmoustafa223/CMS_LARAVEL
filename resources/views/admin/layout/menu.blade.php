@@ -68,6 +68,18 @@
                 <div data-i18n="Analytics">Logo</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('category') ? 'active' : '' }}">
+            <a href="{{ route('category.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Category</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('product') ? 'active' : '' }}">
+            <a href="{{ route('product.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Product</div>
+            </a>
+        </li>
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
