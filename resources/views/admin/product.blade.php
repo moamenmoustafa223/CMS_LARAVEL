@@ -120,18 +120,19 @@
                                     @endif
                                 @endforeach
                                 <td>
-                                    <form action="{{ route('carousel.destroy', $a->id) }}"
+                                    <form action="{{ route('product.destroy', $a->id) }}"
                                         onsubmit="return confirm('Yakin?')" method="post">
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#edit{{ $a->id }}"><i
+                                            data-bs-target="#editProduct{{ $a->id }}"><i
                                                 class="bx bx-edit-alt me-2"></i></button>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i
                                                 class="bx bx-trash me-1"></i></button>
                                     </form>
+                                    @include('admin.modalProduct')
+
                                 </td>
-                                @include('admin.modaledit')
                             </tr>
                         @empty
                             <div class="alert alert-danger alert-dismissible" id="myalert" role="alert">

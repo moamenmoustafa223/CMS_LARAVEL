@@ -65,7 +65,7 @@
                     @method('PUT')
                     <div class="row text-center">
                         <div class="col mb-3">
-                            <input type="text" name="name" value="{{$a->name}}"
+                            <input type="text" name="name" value="{{ $a->name }}"
                                 class="form-control @error('name') is-invalid @enderror" id="basic-default-name">
                         </div>
                     </div>

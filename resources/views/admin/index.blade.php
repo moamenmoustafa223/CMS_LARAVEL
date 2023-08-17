@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h1>hai</h1>
+    <h1>hai  {{ $admin }}</h1>
 </div>
 @endsection

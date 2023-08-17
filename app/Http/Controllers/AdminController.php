@@ -10,7 +10,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $admin = auth()->user()->name;
+        return view('admin.index',compact('admin'));
     }
 
 

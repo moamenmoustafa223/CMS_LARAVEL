@@ -190,7 +190,7 @@
         position: relative;
         min-height: 450px;
     }
-    
+
     #header-carousel .carousel-item img {
         position: absolute;
         width: 100%;
@@ -503,4 +503,17 @@
 
 .copyright a:hover {
     color: #FFFFFF !important;
+}
+
+/*** Service ***/
+.service-item {
+	transition: .5s;
+}
+
+.service-item:hover {
+	margin-top: -10px;
+}
+
+.service-item * {
+	transition: .5s;
 }
