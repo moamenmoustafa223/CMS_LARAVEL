@@ -38,7 +38,7 @@ class CategoryController extends Controller
             'name'     => $request->name,
         ]);
 
-        return redirect()->route('carousel.index')->with('success', 'Berhasil Update Category');
+        return redirect()->route('category.index')->with('success', 'Berhasil Update Category');
     }
 
     public function destroy($id)

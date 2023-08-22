@@ -93,6 +93,13 @@
                     </a>
                 </li>
             </ul>
+            <ul class="menu-sub active {{ Request::is('admin/galley') ? 'active' : '' }}">
+                <li class="menu-item">
+                    <a href="{{ route('gallery.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Galley</div>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </aside>

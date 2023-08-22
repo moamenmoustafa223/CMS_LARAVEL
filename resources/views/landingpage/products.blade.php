@@ -10,24 +10,38 @@
 
     <div class="content">
         <div class="container p-3">
-            <ul class="justify-content-center animated fadeInUp d-flex list-group-horizontal rounded-3">
-                <a data-category="all" style="cursor: pointer" class="category-button list-group-item">All</a>
-                @foreach ($category as $c)
-                    <a data-category="{{ $c->name }}" style="cursor: pointer"
-                        class="category-button list-group-item">{{ $c->name }}</a>
-                @endforeach
-            </ul>
+            <h1 class="text-center animated slideInDown"><i>Category</i></h1>
+            <div class="justify-content-center d-flex text-center animated fadeInUp">
+                <div class="row">
+                    <style>
+                        .category-button:hover {
+                            background-color: #88B44E;
+                            color: white;
+                        }
+                    </style>
+                    <p data-category="all" style="cursor: pointer" class="col p-3 nav-item category-button service-item bordered rounded-3">All</p>
+                    @foreach ($category as $c)
+                        <p data-category="{{ $c->name }}" style="cursor: pointer"
+                            class="col p-3 nav-item category-button service-item bordered rounded-3">{{ $c->name }}</p>
+                    @endforeach
+                </div>
+            </div>
             <div class="row d-flex justify-content-center">
                 @foreach ($product as $p)
                     @foreach ($category as $c)
                         @if ($c->id === $p->category_id)
-                            <div class="col-lg-4 col-md-6 animated fadeInUp products {{ $c->name }} rounded-3 service-item" data-wow-delay="0.5s">
+                            <div class="col-c-50 col-sm-6 col-md-4 col-lg-3 animated fadeInUp products {{ $c->name }} rounded-3 service-item"
+                                data-wow-delay="0.5s">
                                 <div class="store-item position-relative text-center shadow-lg mt-3">
-                                    <img class="img-fluid rounded-top" src="/storage/product/{{ $p->image }}" alt="">
+                                    <a href="{{ asset('/storage/product/' . $p->image) }}" data-lightbox="lightbox"
+                                        data-title="{{ $p->name }}">
+                                        <img src="{{ asset('/storage/product/' . $p->image) }}" alt="random img"
+                                            class="img-fluid">
+                                    </a>
                                     <div class="p-4">
                                         <h4 class="mb-3">{{ $p->name }}</h4>
-                                        <p>{{$p->description}}</p>
-                                        <h4 class="text-primary">Rp. {{ $p->price }}</h4>
+                                        <p>{{ $p->description }}</p>
+                                        <h4 class="text-primary">Rp {{ number_format($p->price, 0, ',', '.') }}</h4>
                                     </div>
                                 </div>
                             </div>

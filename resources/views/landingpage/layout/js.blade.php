@@ -8,3 +8,4 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('teahouse/js/main.js') }}"></script>
+<script src="{{ asset('teahouse/lib/lightbox/lightbox-plus-jquery.min.js') }}"></script>

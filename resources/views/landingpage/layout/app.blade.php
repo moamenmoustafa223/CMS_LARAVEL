@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tea House - Tea Shop Website Template</title>
+    <title> Tea House | {{$page}} </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -13,12 +13,12 @@
 
 <body>
 
-    {{-- <!-- Spinner Start -->
+    <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
-    <!-- Spinner End --> --}}
+    <!-- Spinner End -->
 
 
     <!-- Navbar Start -->
@@ -26,7 +26,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
                 <a href="{{ route('index') }}" class="navbar-brand animated fadeInDown">
-                    <img src="{{ asset('storage/logo/' . $logo->image) }}" alt="">
+                    <img class="img-fluid" src="{{ asset('storage/logo/' . $logo->image) }}" alt="">
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -51,9 +51,6 @@
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <div class="border-start ps-4 d-none d-lg-block">
-                        <button type="button" class="btn btn-sm p-0"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </nav>

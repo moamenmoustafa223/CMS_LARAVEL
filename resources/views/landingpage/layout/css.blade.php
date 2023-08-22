@@ -1,5 +1,5 @@
 <!-- Favicon -->
-<link href="{{ asset('storage/logo/'.$logo->image) }}" rel="icon">
+<link href="{{ asset('storage/logo/' . $logo->image) }}" rel="icon">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,3 +21,5 @@
 
 <!-- Template Stylesheet -->
 <link href="{{ asset('teahouse/css/style.css') }}" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ asset('teahouse/lib/lightbox/lightbox.min.css') }}">
