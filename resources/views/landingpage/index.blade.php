@@ -30,13 +30,18 @@
             </button>
         </div>
     </div>
+    <!-- Carousel End -->
 
     <div class="content">
-        <div class="container p-3">
-            <h1 class="text-center animated slideInDown"><i>Galleries</i></h1>
+        <div class="container p-3 ">
+            <div class="text-center">
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.5s">
+                    <h1 class="text-center animated slideInDown"><i>Galleries</i></h1>
+                </div>
+            </div>
             <div class="row d-flex justify-content-center">
                 @foreach ($gallery as $p)
-                    <div class="col-c-279 col-c-375 col-sm-4 col-md-4 col-lg-3 animated fadeInUp galleries rounded-3 service-item"
+                    <div class="col-c-279 col-c-375 col-sm-4 col-md-4 col-lg-3 wow fadeInUp galleries rounded-3 service-item"
                         data-wow-delay="0.5s">
                         <div class="store-item position-relative text-center  mt-3">
                             <a href="{{ asset('/storage/gallery/' . $p->image) }}" data-lightbox="lightbox"
@@ -50,5 +55,4 @@
             </div>
         </div>
     </div>
-    <!-- Carousel End -->
 @endsection

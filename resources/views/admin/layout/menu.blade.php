@@ -80,6 +80,18 @@
                 <div data-i18n="Analytics">Product</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('contact') ? 'active' : '' }}">
+            <a href="{{ route('contact.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Contact</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('schedule') ? 'active' : '' }}">
+            <a href="{{ route('schedule.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Schedule</div>
+            </a>
+        </li>
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -96,7 +108,7 @@
             <ul class="menu-sub active {{ Request::is('admin/galley') ? 'active' : '' }}">
                 <li class="menu-item">
                     <a href="{{ route('gallery.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Galley</div>
+                        <div data-i18n="Without menu">Gallery</div>
                     </a>
                 </li>
             </ul>
