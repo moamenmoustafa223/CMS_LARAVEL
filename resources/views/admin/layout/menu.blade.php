@@ -92,6 +92,13 @@
                 <div data-i18n="Analytics">Schedule</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('abous') ? 'active' : '' }}">
+            <a href="{{ route('abouts.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">About</div>
+            </a>
+            
+        </li>
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>

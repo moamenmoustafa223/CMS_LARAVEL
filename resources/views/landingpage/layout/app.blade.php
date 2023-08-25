@@ -35,22 +35,13 @@
                 <div class="collapse navbar-collapse animated fadeInRight " id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="{{ route('index') }}"
-                            class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
-                        <a href="" class="nav-item nav-link">About</a>
+                            class="nav-item nav-link service-item  {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                        <a href="{{ route('about') }}"
+                            class="nav-item nav-link service-item {{ Request::is('about') ? 'active' : '' }}">About</a>
                         <a href="{{ route('products') }}"
-                            class="nav-item nav-link {{ Request::is('products') ? 'active' : '' }}">Products</a>
-                        <a href="store.html" class="nav-item nav-link">Store</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle animated"
-                                data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light rounded-0 m-0">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="blog.html" class="dropdown-item">Blog Article</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            class="nav-item nav-link service-item {{ Request::is('products') ? 'active' : '' }}">Products</a>
+                        <a href="{{ route('contacts') }}"
+                            class="nav-item nav-link service-item {{ Request::is('contacts') ? 'active' : '' }}">Contact</a>
                     </div>
                 </div>
             </nav>
@@ -66,14 +57,13 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-primary mb-4">Our Office</h4>
-                    @foreach ($contact as $item)
-                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>{{ $item->address }}</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt text-primary me-3"></i>{{ $item->whatsapp }}</p>
-                        <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>{{ $item->email }}</p>
-                    @endforeach
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>{{ $address }}
+                    </p>
+                    <p class="mb-2"><i class="fa fa-phone-alt text-primary me-3"></i>{{ $whatsapp }}</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>{{ $email }}</p>
                     <div class="d-flex pt-3">
                         <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
-                                class="fab fa-twitter"></i></a>
+                                class="fab fa-instagram"></i></a>
                         <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
                                 class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
@@ -92,7 +82,7 @@
                 <div class="col-lg-3 col-md-6">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3954.2782091895738!2d111.0491372!3d-7.6532054!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a218edda45465%3A0xb9260ff1e10f9be7!2sWarung%20ABC%20by%20LANCAR%20BAROKAH%20GROUP!5e0!3m2!1sid!2sid!4v1692795607023!5m2!1sid!2sid"
-                        width="350" height="350" style="border-radius: 20px;" allowfullscreen="" loading="lazy"
+                        width="300" height="300" style="border-radius: 20px;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>

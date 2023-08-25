@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarouselController;
@@ -39,7 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/contact', ContactController::class);
     Route::resource('/schedule', ScheduleController::class);
+    Route::resource('/abouts', AboutController::class);
 });
 
 Route::get('/',[HomeController::class, 'index'])->name('index');
 Route::get('/products',[HomeController::class, 'products'])->name('products');
+Route::get('/about',[HomeController::class, 'about'])->name('about');
+Route::get('/contacts',[HomeController::class, 'contact'])->name('contacts');

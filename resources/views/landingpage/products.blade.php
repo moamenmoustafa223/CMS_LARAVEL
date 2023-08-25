@@ -10,8 +10,10 @@
 
     <div class="content">
         <div class="container p-3">
-            <h1 class="text-center animated slideInDown"><i>Category</i></h1>
-            <div class="justify-content-center d-flex text-center animated fadeInUp">
+            <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.5s">
+                <h1 class="text-center animated slideInDown"><i>Galleries</i></h1>
+            </div>
+            <div class="justify-content-center d-flex text-center wow fadeInDown "data-wow-delay="0.5s">
                 <div class="row">
                     <style>
                         .category-button:hover {
@@ -19,7 +21,8 @@
                             color: white;
                         }
                     </style>
-                    <p data-category="all" style="cursor: pointer" class="col p-3 nav-item category-button service-item bordered rounded-3">All</p>
+                    <p data-category="all" style="cursor: pointer"
+                        class="col p-3 nav-item category-button service-item bordered rounded-3">All</p>
                     @foreach ($category as $c)
                         <p data-category="{{ $c->name }}" style="cursor: pointer"
                             class="col p-3 nav-item category-button service-item bordered rounded-3">{{ $c->name }}</p>
@@ -30,13 +33,13 @@
                 @foreach ($product as $p)
                     @foreach ($category as $c)
                         @if ($c->id === $p->category_id)
-                            <div class="col-c-50 col-sm-6 col-md-4 col-lg-3 animated fadeInUp products {{ $c->name }} rounded-3 service-item"
+                            <div class="col-c-50 col-sm-6 col-md-4 col-lg-3 wow fadeIn products {{ $c->name }} rounded-3 service-item"
                                 data-wow-delay="0.5s">
-                                <div class="store-item position-relative text-center shadow-lg mt-3">
+                                <div class="store-item rounded-3 position-relative text-center shadow-lg mt-3">
                                     <a href="{{ asset('/storage/product/' . $p->image) }}" data-lightbox="lightbox"
                                         data-title="{{ $p->name }}">
                                         <img src="{{ asset('/storage/product/' . $p->image) }}" alt="random img"
-                                            class="img-fluid">
+                                            class="img-fluid rounded-top">
                                     </a>
                                     <div class="p-4">
                                         <h4 class="mb-3">{{ $p->name }}</h4>
