@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Article;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Contact;
@@ -103,6 +104,51 @@ class HomeController extends Controller
             'email'  => $email,
             'whatsapp'  => $whatsapp,
             'address'  => $address,
+        ]);
+    }
+    public function article()
+    {
+        $logo = Logo::find(1);
+        $page = "Articles";
+        $contact = Contact::find(1);
+        $email = $contact->email;
+        $address = $contact->address;
+        $whatsapp = $contact->whatsapp;
+        $schedule = Schedule::get();
+        $article = Article::get();
+        return view('landingpage.article')->with([
+            'logo'     => $logo,
+            'page'     => $page,
+            'schedule'  => $schedule,
+            'email'  => $email,
+            'whatsapp'  => $whatsapp,
+            'address'  => $address,
+            'article'  => $article,
+        ]);
+    }
+
+    public function articleshow(Article $article)
+    {
+        $logo = Logo::find(1);
+        $page = $article->title;
+        $image = $article->image;
+        $title = $article->title;
+        $content = $article->content;
+        $contact = Contact::find(1);
+        $email = $contact->email;
+        $address = $contact->address;
+        $whatsapp = $contact->whatsapp;
+        $schedule = Schedule::get();
+        return view('landingpage.showArticle')->with([
+            'logo'     => $logo,
+            'page'     => $page,
+            'schedule'  => $schedule,
+            'email'  => $email,
+            'whatsapp'  => $whatsapp,
+            'address'  => $address,
+            'image'  => $image,
+            'title'  => $title,
+            'content'  => $content,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\CategoryController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScheduleController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,9 +43,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/contact', ContactController::class);
     Route::resource('/schedule', ScheduleController::class);
     Route::resource('/abouts', AboutController::class);
+    Route::resource('/article', ArticleController::class);
 });
 
 Route::get('/',[HomeController::class, 'index'])->name('index');
 Route::get('/products',[HomeController::class, 'products'])->name('products');
 Route::get('/about',[HomeController::class, 'about'])->name('about');
 Route::get('/contacts',[HomeController::class, 'contact'])->name('contacts');
+Route::get('/articles',[HomeController::class, 'article'])->name('articles');
+Route::get('articles/{article:slug}', [HomeController::class, 'articleshow'])->name('articleshow');

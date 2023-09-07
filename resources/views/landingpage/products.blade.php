@@ -11,7 +11,7 @@
     <div class="content">
         <div class="container p-3">
             <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.5s">
-                <h1 class="text-center animated slideInDown"><i>Galleries</i></h1>
+                <h1 class="text-center animated slideInDown"><i>Products</i></h1>
             </div>
             <div class="justify-content-center d-flex text-center wow fadeInDown "data-wow-delay="0.5s">
                 <div class="row">

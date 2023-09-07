@@ -38,6 +38,8 @@
                             class="nav-item nav-link service-item  {{ Request::is('/') ? 'active' : '' }}">Home</a>
                         <a href="{{ route('about') }}"
                             class="nav-item nav-link service-item {{ Request::is('about') ? 'active' : '' }}">About</a>
+                        <a href="{{ route('articles') }}"
+                            class="nav-item nav-link service-item {{ Request::is('articles') ? 'active' : '' }}">Article</a>
                         <a href="{{ route('products') }}"
                             class="nav-item nav-link service-item {{ Request::is('products') ? 'active' : '' }}">Products</a>
                         <a href="{{ route('contacts') }}"
