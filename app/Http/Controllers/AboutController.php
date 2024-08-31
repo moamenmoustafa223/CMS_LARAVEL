@@ -10,38 +10,49 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $about = About::get();
-        return view('admin.about',compact('about'));
+        $about = About::all();  // Use all() instead of get() for better readability
+        return view('admin.about', compact('about'));
     }
 
     public function update(Request $request, string $id)
     {
+        // Validate the request data
         $this->validate($request, [
-            'title'         => 'required|min:5',
+            'title_ar'      => 'required|min:5',
+            'title_en'      => 'required|min:5',
             'image'         => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'text'          => 'required|min:5',
+            'description1_ar' => 'required|min:10',
+            'description1_en' => 'required|min:10',
+            'description2_ar' => 'nullable|min:10',
+            'description2_en' => 'nullable|min:10',
         ]);
 
         $post = About::findOrFail($id);
 
+        // Handle image upload if present
         if ($request->hasFile('image')) {
-            $image = $request->image;
-            $image->storeAs('/public/about/' . $image->hashName());
+            $image = $request->file('image');
+            $imagePath = $image->storeAs('public/about', $image->hashName());
 
-            Storage::delete('/public/about/' . $post->image);
+            // Delete old image if it exists
+            if ($post->image) {
+                Storage::delete('public/about/' . $post->image);
+            }
 
-            $post->update([
-                'title'         => $request->title,
-                'image'         => $image->hashName(),
-                'text'          => $request->text,
-            ]);
-        } else {
-            $post->update([
-                'title'         => $request->title,
-                'text'          => $request->text,
-            ]);
+            $post->image = $image->hashName();
         }
 
-        return redirect()->route('abouts.index')->with('success','Berhasil Update About');
+        // Update the model with request data
+        $post->update([
+            'title_ar'         => $request->title_ar,
+            'title_en'         => $request->title_en,
+            'description1_ar'  => $request->description1_ar,
+            'description1_en'  => $request->description1_en,
+            'description2_ar'  => $request->description2_ar,
+            'description2_en'  => $request->description2_en,
+            'image'            => $post->image ?? $request->image, // Use existing or new image
+        ]);
+
+        return redirect()->route('abouts.index')->with('success', 'Successfully updated About information');
     }
 }

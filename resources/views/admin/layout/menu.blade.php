@@ -74,10 +74,16 @@
                 <div data-i18n="Analytics">Category</div>
             </a>
         </li>
-        <li class="menu-item {{ Request::is('product') ? 'active' : '' }}">
-            <a href="{{ route('product.index') }}" class="menu-link">
+        <li class="menu-item {{ Request::is('service') ? 'active' : '' }}">
+            <a href="{{ route('service.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Product</div>
+                <div data-i18n="Analytics">Service</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('upload-images') ? 'active' : '' }}">
+            <a href="{{ route('service.uploadImagesForm') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Service Images</div>
             </a>
         </li>
         <li class="menu-item {{ Request::is('contact') ? 'active' : '' }}">

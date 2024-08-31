@@ -13,9 +13,13 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Judul</th>
-                            <th>Gambar</th>
-                            <th>Tulisan</th>
+                            <th>Title (AR)</th>
+                            <th>Title (EN)</th>
+                            <th>Image</th>
+                            <th>Description 1 (AR)</th>
+                            <th>Description 1 (EN)</th>
+                            <th>Description 2 (AR)</th>
+                            <th>Description 2 (EN)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -23,27 +27,44 @@
                         @forelse ($about as $a)
                             <tr>
                                 <td>
-                                    <p class="">{{ $a->title }}</p>
+                                    <p>{{ $a->title_ar }}</p>
                                 </td>
                                 <td>
-                                    <img class="img-fluid" width="200px" src="storage/about/{{ $a->image }}" alt="" srcset="">
+                                    <p>{{ $a->title_en }}</p>
                                 </td>
                                 <td>
-                                    <p class="">{{ $a->text }}</p>
+                                    <img class="img-fluid" width="200px" src="{{ asset('storage/about/' . $a->image) }}" alt="">
                                 </td>
+                                <td>
+                                    <p>{{ \Illuminate\Support\Str::limit($a->description1_ar, 25, '...') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ \Illuminate\Support\Str::limit($a->description1_en, 25, '...') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ \Illuminate\Support\Str::limit($a->description2_ar ?? 'N/A', 25, '...') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ \Illuminate\Support\Str::limit($a->description2_en ?? 'N/A', 25, '...') }}</p>
+                                </td>
+                                
                                 <td>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                         data-bs-target="#editAbout{{ $a->id }}"><i
-                                            class="bx bx-edit-alt me-2"></i></button>
+                                            class="bx bx-edit-alt me-2"></i>Edit</button>
                                     @include('admin.modalAbout')
                                 </td>
                             </tr>
                         @empty
-                            <div class="alert alert-danger alert-dismissible" id="myalert" role="alert">
-                                Data Kosong
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div class="alert alert-danger alert-dismissible" id="myalert" role="alert">
+                                        No data found
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                </td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>

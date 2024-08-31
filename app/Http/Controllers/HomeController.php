@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\ContactFormResponse;
 
 use App\Models\About;
 use App\Models\Article;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\ContactResponse;
 use App\Models\Gallery;
 use App\Models\Logo;
 use App\Models\Product;
 use App\Models\Schedule;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,76 +21,142 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $carousel = Carousel::get();
+        $activeServices = Service::where('status', 'active')->get();
         $logo = Logo::find(1);
         $page = "Home";
-        $gallery = Gallery::get();
         $contact = Contact::find(1);
-        $email = $contact->email;
-        $address = $contact->address;
-        $whatsapp = $contact->whatsapp;
+    
+        // Initialize variables with default values
+        $email = null;
+        $address = null;
+        $whatsapp = null;
+    
+        // Check if $contact is not null before accessing its properties
+        if ($contact) {
+            $email = $contact->email;
+            $address = $contact->address;
+            $whatsapp = $contact->whatsapp;
+        }
+    
         $schedule = Schedule::get();
+    
         return view('landingpage.index')->with([
-            'page'     => $page,
-            'carousel' => $carousel,
-            'logo'     => $logo,
-            'gallery'  => $gallery,
+            'services'  => $activeServices, 
+            'logo'      => $logo,
+            'page'      => $page,
             'schedule'  => $schedule,
-            'email'  => $email,
+            'email'     => $email,
             'whatsapp'  => $whatsapp,
-            'address'  => $address,
+            'address'   => $address,
         ]);
     }
+    
 
-    public function products()
+    public function services()
     {
-        $product = Product::get();
+        $activeServices = Service::where('status', 'active')->get();
         $logo = Logo::find(1);
-        $page = "Products";
-        $contact = Contact::find(1);
-        $email = $contact->email;
-        $address = $contact->address;
-        $whatsapp = $contact->whatsapp;
+        $page = "Services";
+        $contact = Contact::find(1); // Attempt to find the contact with ID 1
+    
+        // Initialize variables with default values
+        $email = null;
+        $address = null;
+        $whatsapp = null;
+    
+        // Check if $contact is not null before accessing its properties
+        if ($contact) {
+            $email = $contact->email;
+            $address = $contact->address;
+            $whatsapp = $contact->whatsapp;
+        }
+    
         $schedule = Schedule::get();
-        $category = Category::orderBy('name','asc')->get();
-        return view('landingpage.products')->with([
-            'product' => $product,
-            'logo'     => $logo,
-            'category'     => $category,
-            'page'     => $page,
+    
+        return view('landingpage.servicesIndex')->with([
+            'services'  => $activeServices, 
+            'logo'      => $logo,
+            'page'      => $page,
             'schedule'  => $schedule,
-            'email'  => $email,
+            'email'     => $email,
             'whatsapp'  => $whatsapp,
-            'address'  => $address,
+            'address'   => $address,
         ]);
+    }
+    
+    public function show($slug)
+    {
+        $contact = Contact::find(1);
+        if ($contact) {
+            $email = $contact->email;
+            $address = $contact->address;
+            $whatsapp = $contact->whatsapp;
+        }
+    
+        $schedule = Schedule::get();
+        $service = Service::where('slug', $slug)->firstOrFail();
+        $images = $service->images; 
+        $page = $service->name_en; // or $service->name_ar for Arabic
+        return view('landingpage.servicesShow')->with([
+            'service'  => $service, 
+            'page'      => $page,
+            'schedule'  => $schedule,
+            'email'     => $email,
+            'whatsapp'  => $whatsapp,
+            'address'   => $address,
+            'images'   => $images,
+        ]);
+
     }
 
     public function about()
-    {
-        $logo = Logo::find(1);
-        $page = "About Us";
-        $contact = Contact::find(1);
-        $email = $contact->email;
-        $address = $contact->address;
-        $whatsapp = $contact->whatsapp;
-        $schedule = Schedule::get();
-        $about = About::find(1);
-        $title = $about->title;
-        $image = $about->image;
-        $text = $about->text;
-        return view('landingpage.about')->with([
-            'logo'     => $logo,
-            'page'     => $page,
-            'schedule'  => $schedule,
-            'text'  => $text,
-            'image'  => $image,
-            'title'  => $title,
-            'email'  => $email,
-            'whatsapp'  => $whatsapp,
-            'address'  => $address,
-        ]);
-    }
+{
+    $page= "About Us";
+    $page_en = "About Us";  
+    $page_ar = "من نحن"; 
+    $schedule = Schedule::get();
+    $about = About::all(); 
 
+    return view('landingpage.about')->with([
+        'page'     => $page,
+        'page_en'     => $page_en,
+        'page_ar'     => $page_ar,
+        'schedule' => $schedule,
+        'about'    => $about, // Pass the entire collection to the view
+       
+    ]);
+}
+
+
+
+public function submitContactForm(Request $request)
+{
+    // Validate the form data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'phone' => 'required|string|max:20',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string|max:1000',
+    ]);
+
+    try {
+        // Store the form data
+        ContactResponse::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'message' => $request->message,
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->route('index')->with('success', 'Your message has been sent successfully!');
+    } catch (\Exception $e) {
+        // Redirect back with an error message
+        return redirect()->back()->withErrors(['form' => 'There was an error sending your message. Please try again later.']);
+    }
+}
+
+    
     public function contact()
     {
         $logo = Logo::find(1);

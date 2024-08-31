@@ -12,6 +12,8 @@ class Logo extends Model
     public $table = 'logo';
 
     protected $fillable = [
-        'image'
+        'image',
+        'brief_ar',
+        'brief_en',
     ];
 }

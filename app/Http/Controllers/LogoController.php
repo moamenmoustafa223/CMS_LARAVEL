@@ -10,42 +10,60 @@ class LogoController extends Controller
 {
     public function index()
     {
-        $logo = Logo::get();
+        $logo = Logo::all(); // Changed to all() for better clarity
         return view('admin.logo', compact('logo'));
     }
 
     public function store(Request $request)
     {
+        // Validate the request, including the new fields
         $this->validate($request, [
             'image'     => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'brief_ar'  => 'nullable|string|max:255',
+            'brief_en'  => 'nullable|string|max:255',
         ]);
 
-        $image = $request->image;
-        $image->storeAs('/public/logo', $image->hashName());
+        $image = $request->file('image'); // Use file() method to handle file uploads
+        $imagePath = $image->storeAs('public/logo', $image->hashName());
 
         Logo::create([
             'image'     => $image->hashName(),
+            'brief_ar'  => $request->input('brief_ar'),
+            'brief_en'  => $request->input('brief_en'),
         ]);
 
-        return redirect()->route('logo.index')->with('success', 'Berhasil Input Logo');
+        return redirect()->route('logo.index')->with('success', 'Logo successfully created');
     }
 
     public function update(Request $request, $id)
     {
+        // Validate the request, including the new fields
         $this->validate($request, [
-            'image'     => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'brief_ar'  => 'nullable|string|max:255',
+            'brief_en'  => 'nullable|string|max:255',
         ]);
 
-        $post = Logo::findOrFail($id);
+        $logo = Logo::findOrFail($id);
 
-        $image = $request->image;
-        $image->storeAs('/public/logo/' . $image->hashName());
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->storeAs('public/logo', $image->hashName());
 
-        Storage::delete('/public/logo/' . $post->image);
+            // Delete the old image if it exists
+            if ($logo->image) {
+                Storage::delete('public/logo/' . $logo->image);
+            }
 
-        $post->update([
-            'image'     => $image->hashName(),
+            $logo->image = $image->hashName();
+        }
+
+        // Update other fields
+        $logo->update([
+            'brief_ar'  => $request->input('brief_ar', $logo->brief_ar),
+            'brief_en'  => $request->input('brief_en', $logo->brief_en),
         ]);
-        return redirect()->route('logo.index')->with('success','Berhasil Update Logo');
+
+        return redirect()->route('logo.index')->with('success', 'Logo successfully updated');
     }
 }
