@@ -20,7 +20,7 @@
 </div>
 <section class="service-details py-5" id="serviceDetails">
     <div class="container">
-        <div class="row align-items-center">
+        <div class="row align-items-center"> 
             <div class="col-md-6 ">
                 @if ($images->count() > 0)
                 <div class="swiper mySwiperService">
